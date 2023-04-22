@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_test_star_wars/app/domain/responses/film_response.dart';
 import 'package:flutter_meedu/meedu.dart';
 
 import '../../../../core/inject.dart';
+import '../../../../core/typedefs.dart';
 import '../../../../core/widget_state.dart';
 import '../../../../data/helpers/http_helper_response.dart';
 import '../../../../domain/repositories/star_wars_repository.dart';
@@ -76,5 +78,37 @@ class HomeController extends StateNotifier<HomeState> {
         ),
       );
     }
+  }
+
+  Future<void> getFilms(
+    bool openFilms,
+    List<String> filmsUrl,
+    String url,
+  ) async {
+    List<Film> films = [];
+    final character = state.characters.firstWhere(
+      (element) => element.url == url,
+    );
+    character.openFilms = openFilms;
+    if (openFilms) {
+      for (int i = 0; i < filmsUrl.length; i++) {
+        final GenericResponse genericResponse = await _starWars.getFilms(
+          url: filmsUrl[i],
+        );
+        if (genericResponse.item1 == HttpHelperResponse.ok) {
+          final Film film = genericResponse.item2;
+          films.add(film);
+        }
+      }
+      character.films = films;
+    }
+  }
+
+  void changeWidgetState(WidgetState widgetState) {
+    onlyUpdate(
+      state = state.copyWith(
+        widgetState: widgetState,
+      ),
+    );
   }
 }

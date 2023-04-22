@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_test_star_wars/app/core/widget_state.dart';
-import 'package:flutter_app_test_star_wars/app/presentation/modules/home/controller/home_controller.dart';
 
 import '../../../../../core/responsive.dart';
 import '../../../../../domain/responses/character_response.dart';
-import 'filter_characters.dart';
+import '../../controller/home_controller.dart';
+import 'bottom_loading.dart';
+import 'card_character.dart';
 
 class LoadedHome extends StatelessWidget {
   final List<Result> characters;
@@ -49,35 +49,13 @@ class LoadedHome extends StatelessWidget {
                   children: [
                     Container(
                       width: responsive.width,
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 10,
+                      margin: EdgeInsets.symmetric(
+                        horizontal: responsive.wp(2),
+                        vertical: responsive.hp(1),
                       ),
-                      child: Card(
-                        elevation: 3,
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Container(
-                          padding: EdgeInsets.only(
-                              top: responsive.hp(1),
-                              bottom: responsive.hp(1),
-                              left: responsive.wp(1.5)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(characters[index].name),
-                              Text(characters[index].gender.name),
-                              FilterCharacters(
-                                films: characters[index].films,
-                              ),
-                            ],
-                          ),
-                        ),
+                      child: CardCharacter(
+                        character: characters[index],
+                        homeController: homeController,
                       ),
                     ),
                   ],
@@ -86,18 +64,9 @@ class LoadedHome extends StatelessWidget {
               childCount: characters.length,
             ),
           ),
-          homeController.state.widgetState == WidgetState.fetching
-              ? SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: responsive.dp(2),
-                    ),
-                    child: const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  ),
-                )
-              : const SliverToBoxAdapter(),
+          BottomLoading(
+            homeController: homeController,
+          ),
         ],
       ),
     );

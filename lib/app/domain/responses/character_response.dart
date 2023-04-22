@@ -6,6 +6,8 @@
 
 import 'dart:convert';
 
+import 'film_response.dart';
+
 Character characterFromJson(String str) => Character.fromJson(json.decode(str));
 
 String characterToJson(Character data) => json.encode(data.toJson());
@@ -53,13 +55,15 @@ class Result {
     required this.birthYear,
     required this.gender,
     required this.homeworld,
-    required this.films,
+    required this.filmsUrl,
     required this.species,
     required this.vehicles,
     required this.starships,
     required this.created,
     required this.edited,
     required this.url,
+    required this.films,
+    required this.openFilms,
   });
 
   final String name;
@@ -71,13 +75,17 @@ class Result {
   final String birthYear;
   final Gender gender;
   final String homeworld;
-  final List<String> films;
+  final List<String> filmsUrl;
   final List<String> species;
   final List<String> vehicles;
   final List<String> starships;
   final DateTime created;
   final DateTime edited;
   final String url;
+
+  /// state for UI
+  bool openFilms;
+  List<Film> films;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         name: json["name"],
@@ -89,13 +97,15 @@ class Result {
         birthYear: json["birth_year"],
         gender: genderValues.map[json["gender"]]!,
         homeworld: json["homeworld"],
-        films: List<String>.from(json["films"].map((x) => x)),
+        filmsUrl: List<String>.from(json["films"].map((x) => x)),
         species: List<String>.from(json["species"].map((x) => x)),
         vehicles: List<String>.from(json["vehicles"].map((x) => x)),
         starships: List<String>.from(json["starships"].map((x) => x)),
         created: DateTime.parse(json["created"]),
         edited: DateTime.parse(json["edited"]),
         url: json["url"],
+        films: [],
+        openFilms: false,
       );
 
   Map<String, dynamic> toJson() => {

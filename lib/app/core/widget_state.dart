@@ -6,5 +6,7 @@ enum WidgetState {
   timeout,
   error,
   bottomLoading,
+  openFilmsLoading,
+  closeFilmsLoading,
   ok,
 }

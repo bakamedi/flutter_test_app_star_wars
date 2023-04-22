@@ -12,4 +12,9 @@ class StarWarsRepositoryImpl implements StarWarsRepository {
   Future<GenericResponse> getCharacters({required int page}) async {
     return await _starWarsApi.getCharacter(page: page);
   }
+
+  @override
+  Future<GenericResponse> getFilms({required String url}) async {
+    return await _starWarsApi.getFilms(url: url);
+  }
 }
