@@ -20,13 +20,13 @@ class Character {
 
   final int count;
   final String next;
-  final String previous;
+  final String? previous;
   final List<Result> results;
 
   factory Character.fromJson(Map<String, dynamic> json) => Character(
         count: json["count"],
         next: json["next"],
-        previous: json["previous"] ?? '',
+        previous: json["previous"],
         results: List<Result>.from(
           json["results"].map((x) => Result.fromJson(x)),
         ),
@@ -124,6 +124,7 @@ enum Gender {
   FEMALE,
   UNKNOWN,
   NA,
+  NONE,
 }
 
 final genderValues = EnumValues({
@@ -132,6 +133,7 @@ final genderValues = EnumValues({
   "female": Gender.FEMALE,
   "unknown": Gender.UNKNOWN,
   "n/a": Gender.NA,
+  "none": Gender.NONE,
 });
 
 class EnumValues<T> {

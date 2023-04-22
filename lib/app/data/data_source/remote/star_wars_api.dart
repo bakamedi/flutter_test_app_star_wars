@@ -12,6 +12,7 @@ class StarWarsApi {
   Future<GenericResponse> getCharacter({
     required int page,
   }) async {
+    print(page);
     final result = await _http.request(
       '/people/?page=$page',
       parser: (data) {
