@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_test_star_wars/app/domain/responses/film_response.dart';
 import 'package:flutter_meedu/meedu.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../core/inject.dart';
 import '../../../../core/typedefs.dart';
@@ -8,21 +8,30 @@ import '../../../../core/widget_state.dart';
 import '../../../../data/helpers/http_helper_response.dart';
 import '../../../../domain/repositories/star_wars_repository.dart';
 import '../../../../domain/responses/character_response.dart';
+import '../../../../domain/responses/film_response.dart';
+import '../../../global/controllers/device_permission_controller.dart';
 import 'home_state.dart';
 
 class HomeController extends StateNotifier<HomeState> {
+  final DevicePermissionController _devicePermissionController;
+
   final ScrollController _scrollController = ScrollController();
 
   final StarWarsRepository _starWars = Repositories.starWarsRepo;
 
   ScrollController get scrollController => _scrollController;
 
-  HomeController() : super(HomeState.initialState);
+  HomeController(
+    this._devicePermissionController,
+  ) : super(HomeState.initialState);
 
   Future<void> load(
     int page, {
     bool retry = false,
   }) async {
+    _devicePermissionController.requestPermission(
+      permission: Permission.sensors,
+    );
     if (retry) {
       onlyUpdate(
         state = state.copyWith(

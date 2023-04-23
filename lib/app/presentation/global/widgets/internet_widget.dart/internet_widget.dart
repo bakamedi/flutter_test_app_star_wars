@@ -38,7 +38,7 @@ class InternetWidget extends StatelessWidget {
             ),
           ),
           PrimaryButton(
-            text: 'Hola mundo',
+            text: 'Intentar nuevamente',
             onPressed: onPressed,
           ),
         ],

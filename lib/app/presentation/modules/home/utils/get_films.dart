@@ -1,5 +1,4 @@
-import 'package:flutter_app_test_star_wars/app/core/widget_state.dart';
-
+import '../../../../core/widget_state.dart';
 import '../controller/home_controller.dart';
 import '../controller/home_provider.dart';
 
