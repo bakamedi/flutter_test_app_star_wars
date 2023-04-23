@@ -42,7 +42,6 @@ abstract class DevicePermission {
     Permission permission,
   ) async {
     final status = await permission.request();
-    print(status);
     return status;
   }
 

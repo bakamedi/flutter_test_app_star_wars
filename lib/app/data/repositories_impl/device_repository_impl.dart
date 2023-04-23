@@ -8,7 +8,6 @@ class DevicePermissionRepositoryImpl extends DevicePermissionRepository {
     required Permission permission,
   }) async {
     final status = await permission.request();
-    print(status);
     return status;
   }
 }

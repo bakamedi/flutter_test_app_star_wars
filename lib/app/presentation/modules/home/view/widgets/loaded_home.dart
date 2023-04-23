@@ -37,11 +37,6 @@ class LoadedHome extends StatelessWidget {
       child: CustomScrollView(
         controller: homeController.scrollController,
         slivers: [
-          SliverToBoxAdapter(
-            child: Placeholder(
-              fallbackHeight: responsive.hp(10),
-            ),
-          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
