@@ -1,16 +1,34 @@
-# flutter_app_test_star_wars
+# Star Wars App
 
-A new Flutter project.
+Proyecto en Flutter para una prueba técnica.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+### Librerías/Paquetes externos usados
 
-A few resources to get you started if this is your first Flutter project:
+## [Flutter Meedu](https://pub.dev/packages/flutter_meedu)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Manejador de estado para la programación reáctiva y navegación entre pantallas
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## [Freezed Annotation](https://pub.dev/packages/freezed_annotation)
+Paquete para generar codigo freezed para el modelo de datos
+
+## [Dio](https://pub.dev/packages/dio)
+Paquete que ayuda para las peticiones HTTP/HTTPS
+
+## [Tuple](https://pub.dev/packages/tuple)
+Permite una estrucutura de datos en tupla
+
+## [Internet Connection Checker](https://pub.dev/packages/internet_connection_checker)
+Verifica el internet de la aplicación
+
+## [Get It](https://pub.dev/packages/get_it)
+Paquete que permite la inyección de dependencias 
+
+## [Permission Handler](https://pub.dev/packages/permission_handler)
+Paquete que permite acceder a los permisos del celular
+
+## [Sensors plus](https://pub.dev/packages/sensors_plus)
+Paquete que accede al sensor del giroscopio
+
+## API
+API Usada para la prueba [SWAPI](https://swapi.dev/)
