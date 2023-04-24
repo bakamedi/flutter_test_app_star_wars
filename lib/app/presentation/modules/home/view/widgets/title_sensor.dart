@@ -21,7 +21,6 @@ class TitleSensor extends StatelessWidget {
             final sensorController = ref.watch(sensorProvider);
             final x = sensorController.x;
             final y = sensorController.y;
-            final z = sensorController.z;
 
             return AppBar(
               backgroundColor: Colors.white,
