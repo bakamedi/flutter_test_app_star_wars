@@ -6,30 +6,41 @@ import '../../../../core/inject.dart';
 import '../../../../core/typedefs.dart';
 import '../../../../core/widget_state.dart';
 import '../../../../data/helpers/http_helper_response.dart';
+import '../../../../domain/repositories/device_repository.dart';
 import '../../../../domain/repositories/star_wars_repository.dart';
 import '../../../../domain/responses/character_response.dart';
 import '../../../../domain/responses/film_response.dart';
-import '../../../global/controllers/device_permission_controller.dart';
 import 'home_state.dart';
 
 class HomeController extends StateNotifier<HomeState> {
-  final DevicePermissionController _devicePermissionController;
-
   final ScrollController _scrollController = ScrollController();
 
   final StarWarsRepository _starWars = Repositories.starWarsRepo;
+  final DevicePermissionRepository _devicePermission =
+      Repositories.devicePermissionRepo;
 
   ScrollController get scrollController => _scrollController;
 
-  HomeController(
-    this._devicePermissionController,
-  ) : super(HomeState.initialState);
+  List<bool> get filters => state.filters;
+
+  bool get maleFilterSelected => state.filters[0];
+  bool get femaleFilterSelected => state.filters[1];
+  bool get unknowmFilterSelected => state.filters[2];
+
+  HomeController() : super(HomeState.initialState);
+
+  void clearFilters() {
+    for (int i = 0; i < filters.length; i++) {
+      filters[i] = false;
+    }
+  }
 
   Future<void> load(
     int page, {
     bool retry = false,
   }) async {
-    _devicePermissionController.requestPermission(
+    //clearFilters();
+    _devicePermission.requestPermission(
       permission: Permission.sensors,
     );
     if (retry) {
@@ -118,6 +129,17 @@ class HomeController extends StateNotifier<HomeState> {
       state = state.copyWith(
         widgetState: widgetState,
       ),
+    );
+  }
+
+  void selectedFilter(
+    int index,
+    bool selected,
+  ) {
+    List<bool> tabs = [...filters];
+    tabs[index] = selected;
+    state = state.copyWith(
+      filters: [...tabs],
     );
   }
 }

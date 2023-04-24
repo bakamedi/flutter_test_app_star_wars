@@ -22,7 +22,7 @@ class HomeView extends StatelessWidget {
         return Scaffold(
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(
-              responsive.hp(8),
+              responsive.hp(9),
             ),
             child: TitleSensor(),
           ),
