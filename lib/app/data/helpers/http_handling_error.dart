@@ -5,7 +5,7 @@ import 'package:tuple/tuple.dart';
 import 'http_helper_response.dart';
 import 'http_result.dart';
 
-/// Maneja los errores mas comunes de las peticiones de Fashion's Park
+/// Maneja los errores mas comunes de las peticiones HTTP
 /// recibe el resultado como [result]
 Tuple2<HttpHelperResponse, dynamic> httpHandlingError(
   HttpResult<dynamic> result, {

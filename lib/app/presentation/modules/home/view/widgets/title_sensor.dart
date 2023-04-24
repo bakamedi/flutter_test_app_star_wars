@@ -25,12 +25,19 @@ class TitleSensor extends StatelessWidget {
 
             return AppBar(
               backgroundColor: Colors.white,
-              title: Container(
-                color: Colors.black,
-                child: Image.asset(
-                  'assets/logo.png',
-                  fit: BoxFit.contain,
-                  height: 45,
+              title: Transform(
+                transform: Matrix4.identity()
+                  ..setEntry(3, 2, 0.002)
+                  ..rotateX(x)
+                  ..rotateY(y),
+                alignment: Alignment.center,
+                child: Container(
+                  color: Colors.black,
+                  child: Image.asset(
+                    'assets/logo.png',
+                    fit: BoxFit.contain,
+                    height: 45,
+                  ),
                 ),
               ),
               actions: [
@@ -38,7 +45,7 @@ class TitleSensor extends StatelessWidget {
                   icon: Icon(
                     Icons.filter_alt_outlined,
                     color: Colors.black,
-                    size: responsive.dp(2.5),
+                    size: responsive.dp(4),
                   ),
                   onPressed: () => openFilterModal(context),
                 )

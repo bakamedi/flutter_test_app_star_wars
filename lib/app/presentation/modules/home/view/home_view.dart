@@ -24,7 +24,7 @@ class HomeView extends StatelessWidget {
             preferredSize: Size.fromHeight(
               responsive.hp(9),
             ),
-            child: const TitleSensor(),
+            child: TitleSensor(),
           ),
           body: Consumer(
             builder: (_, ref, __) {
