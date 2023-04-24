@@ -21,15 +21,18 @@ class LoadedHome extends StatelessWidget {
 
     return NotificationListener(
       onNotification: (notification) {
+        final isEmpty = homeController.charactersFilters.isEmpty;
         final position = homeController.scrollController.position;
-        if (notification is ScrollEndNotification) {
-          final offset = position.pixels;
-          final maxScrollExtent = position.maxScrollExtent;
-          if (offset >= maxScrollExtent) {
-            homeController.load(
-              homeController.state.page + 1,
-              retry: true,
-            );
+        if (isEmpty) {
+          if (notification is ScrollEndNotification) {
+            final offset = position.pixels;
+            final maxScrollExtent = position.maxScrollExtent;
+            if (offset >= maxScrollExtent) {
+              homeController.load(
+                homeController.state.page + 1,
+                retry: true,
+              );
+            }
           }
         }
         return true;
@@ -48,15 +51,23 @@ class LoadedHome extends StatelessWidget {
                         horizontal: responsive.wp(2),
                         vertical: responsive.hp(1),
                       ),
-                      child: CardCharacter(
-                        character: characters[index],
-                        homeController: homeController,
-                      ),
+                      child: homeController.charactersFilters.isEmpty
+                          ? CardCharacter(
+                              character: characters[index],
+                              homeController: homeController,
+                            )
+                          : CardCharacter(
+                              character:
+                                  homeController.charactersFilters[index],
+                              homeController: homeController,
+                            ),
                     ),
                   ],
                 );
               },
-              childCount: characters.length,
+              childCount: homeController.charactersFilters.isEmpty
+                  ? characters.length
+                  : homeController.charactersFilters.length,
             ),
           ),
           BottomLoading(

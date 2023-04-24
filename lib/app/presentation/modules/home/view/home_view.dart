@@ -37,7 +37,10 @@ class HomeView extends StatelessWidget {
                   characters: state.characters,
                   homeController: homeController,
                 ),
-                onPressed: () {},
+                onPressed: () => homeController.load(
+                  1,
+                  retry: true,
+                ),
               );
             },
           ),

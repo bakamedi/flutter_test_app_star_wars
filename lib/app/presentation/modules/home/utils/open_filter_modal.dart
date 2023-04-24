@@ -4,6 +4,8 @@ import 'package:flutter_meedu/ui.dart';
 import '../../../../core/responsive.dart';
 import '../controller/home_controller.dart';
 import '../controller/home_provider.dart';
+import '../view/widgets/apply_filter.dart';
+import 'clear_filter.dart';
 import 'verify_filter.dart';
 
 void openFilterModal(BuildContext context) async {
@@ -34,7 +36,7 @@ List<Widget> _listTitle(
   HomeController homeController,
 ) {
   List<Widget> list = [];
-  for (var i = 0; i < homeController.filters.length; i++) {
+  for (int i = 0; i < homeController.filters.length; i++) {
     list.add(
       ListTile(
         leading: _icon(i),
@@ -60,7 +62,8 @@ List<Widget> _listTitle(
           SizedBox(
             width: responsive.wp(90),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed:
+                  homeController.applyFilter ? () => applyFilter() : null,
               child: Text(
                 'Aplicar filtro',
                 style: TextStyle(
@@ -72,10 +75,7 @@ List<Widget> _listTitle(
           SizedBox(
             width: responsive.wp(90),
             child: OutlinedButton(
-              onPressed: () {
-                homeController.clearFilters();
-                router.pop();
-              },
+              onPressed: () => clearFilter(),
               child: Text(
                 'Limpiar filtro',
                 style: TextStyle(

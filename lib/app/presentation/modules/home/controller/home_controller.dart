@@ -25,6 +25,8 @@ class HomeController extends StateNotifier<HomeState> {
 
   bool get applyFilter => state.applyFilter;
 
+  List<Result> get charactersFilters => state.charactersFilters;
+
   bool get maleFilterSelected => state.filters[0];
   bool get femaleFilterSelected => state.filters[1];
   bool get unknowmFilterSelected => state.filters[2];
@@ -54,6 +56,9 @@ class HomeController extends StateNotifier<HomeState> {
         state = state.copyWith(
           total: 0,
           page: 1,
+          filters: [false, false, false],
+          applyFilter: false,
+          charactersFilters: [],
         ),
       );
     }
@@ -145,7 +150,93 @@ class HomeController extends StateNotifier<HomeState> {
     List<bool> copyFilters = [...filters];
     copyFilters[index] = !copyFilters[index];
     state = state.copyWith(
+      applyFilter: copyFilters[0] || copyFilters[1] || copyFilters[2],
       filters: [...copyFilters],
+    );
+    print(copyFilters[0] || copyFilters[1] || copyFilters[2]);
+    print(copyFilters);
+  }
+
+  void applyFilters() {
+    List<Result> resultCopy = state.characters;
+    late List<Result> resultFilter;
+    if (filters[0] && !filters[1] && !filters[2]) {
+      resultFilter = resultCopy
+          .where(
+            (element) => element.gender == Gender.MALE,
+          )
+          .toList();
+    } else if (filters[1] && !filters[0] && !filters[2]) {
+      resultFilter = resultCopy
+          .where(
+            (element) => element.gender == Gender.FEMALE,
+          )
+          .toList();
+    } else if (filters[2] && !filters[0] && !filters[1]) {
+      resultFilter = resultCopy
+          .where(
+            (element) =>
+                element.gender == Gender.NA ||
+                element.gender == Gender.HERMAPHRODITE ||
+                element.gender == Gender.NONE ||
+                element.gender == Gender.UNKNOWN,
+          )
+          .toList();
+    } else if (filters[0] && filters[1]) {
+      resultFilter = resultCopy
+          .where(
+            (element) =>
+                element.gender == Gender.MALE ||
+                element.gender == Gender.FEMALE,
+          )
+          .toList();
+    } else if (filters[0] && filters[2]) {
+      resultFilter = resultCopy
+          .where(
+            (element) =>
+                element.gender == Gender.MALE ||
+                element.gender == Gender.NA ||
+                element.gender == Gender.HERMAPHRODITE ||
+                element.gender == Gender.NONE ||
+                element.gender == Gender.UNKNOWN,
+          )
+          .toList();
+    } else if (filters[1] && filters[2]) {
+      resultFilter = resultCopy
+          .where(
+            (element) =>
+                element.gender == Gender.FEMALE ||
+                element.gender == Gender.NA ||
+                element.gender == Gender.HERMAPHRODITE ||
+                element.gender == Gender.NONE ||
+                element.gender == Gender.UNKNOWN,
+          )
+          .toList();
+    } else {
+      resultFilter = resultCopy
+          .where(
+            (element) =>
+                element.gender == Gender.MALE ||
+                element.gender == Gender.FEMALE ||
+                element.gender == Gender.NA ||
+                element.gender == Gender.HERMAPHRODITE ||
+                element.gender == Gender.NONE ||
+                element.gender == Gender.UNKNOWN,
+          )
+          .toList();
+    }
+    for (var element in resultFilter) {
+      print(element.gender.name);
+    }
+    state = state.copyWith(
+      applyFilter: true,
+      charactersFilters: resultFilter,
+    );
+  }
+
+  void changeApplyFilter(bool apply) {
+    state = state.copyWith(
+      applyFilter: apply,
     );
   }
 }

@@ -16,6 +16,7 @@ class HomeState with _$HomeState {
     @Default([false, false, false]) List<bool> filters,
     @Default(WidgetState.initialized) WidgetState widgetState,
     @Default([]) List<Result> characters,
+    @Default([]) List<Result> charactersFilters,
     @Default(1) int page,
     @Default(0) int total,
   }) = _HomeState;

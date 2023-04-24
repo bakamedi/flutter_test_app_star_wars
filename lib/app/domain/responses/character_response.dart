@@ -130,8 +130,8 @@ class Result {
 
 enum Gender {
   MALE,
-  HERMAPHRODITE,
   FEMALE,
+  HERMAPHRODITE,
   UNKNOWN,
   NA,
   NONE,

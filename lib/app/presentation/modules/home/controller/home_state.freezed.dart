@@ -20,6 +20,7 @@ mixin _$HomeState {
   List<bool> get filters => throw _privateConstructorUsedError;
   WidgetState get widgetState => throw _privateConstructorUsedError;
   List<Result> get characters => throw _privateConstructorUsedError;
+  List<Result> get charactersFilters => throw _privateConstructorUsedError;
   int get page => throw _privateConstructorUsedError;
   int get total => throw _privateConstructorUsedError;
 
@@ -38,6 +39,7 @@ abstract class $HomeStateCopyWith<$Res> {
       List<bool> filters,
       WidgetState widgetState,
       List<Result> characters,
+      List<Result> charactersFilters,
       int page,
       int total});
 }
@@ -59,6 +61,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? filters = null,
     Object? widgetState = null,
     Object? characters = null,
+    Object? charactersFilters = null,
     Object? page = null,
     Object? total = null,
   }) {
@@ -78,6 +81,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       characters: null == characters
           ? _value.characters
           : characters // ignore: cast_nullable_to_non_nullable
+              as List<Result>,
+      charactersFilters: null == charactersFilters
+          ? _value.charactersFilters
+          : charactersFilters // ignore: cast_nullable_to_non_nullable
               as List<Result>,
       page: null == page
           ? _value.page
@@ -103,6 +110,7 @@ abstract class _$$_HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
       List<bool> filters,
       WidgetState widgetState,
       List<Result> characters,
+      List<Result> charactersFilters,
       int page,
       int total});
 }
@@ -122,6 +130,7 @@ class __$$_HomeStateCopyWithImpl<$Res>
     Object? filters = null,
     Object? widgetState = null,
     Object? characters = null,
+    Object? charactersFilters = null,
     Object? page = null,
     Object? total = null,
   }) {
@@ -138,6 +147,10 @@ class __$$_HomeStateCopyWithImpl<$Res>
       characters: null == characters
           ? _value._characters
           : characters // ignore: cast_nullable_to_non_nullable
+              as List<Result>,
+      charactersFilters: null == charactersFilters
+          ? _value._charactersFilters
+          : charactersFilters // ignore: cast_nullable_to_non_nullable
               as List<Result>,
       page: null == page
           ? _value.page
@@ -159,10 +172,12 @@ class _$_HomeState extends _HomeState with DiagnosticableTreeMixin {
       final List<bool> filters = const [false, false, false],
       this.widgetState = WidgetState.initialized,
       final List<Result> characters = const [],
+      final List<Result> charactersFilters = const [],
       this.page = 1,
       this.total = 0})
       : _filters = filters,
         _characters = characters,
+        _charactersFilters = charactersFilters,
         super._();
 
   @override
@@ -189,6 +204,16 @@ class _$_HomeState extends _HomeState with DiagnosticableTreeMixin {
     return EqualUnmodifiableListView(_characters);
   }
 
+  final List<Result> _charactersFilters;
+  @override
+  @JsonKey()
+  List<Result> get charactersFilters {
+    if (_charactersFilters is EqualUnmodifiableListView)
+      return _charactersFilters;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_charactersFilters);
+  }
+
   @override
   @JsonKey()
   final int page;
@@ -198,7 +223,7 @@ class _$_HomeState extends _HomeState with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeState(applyFilter: $applyFilter, filters: $filters, widgetState: $widgetState, characters: $characters, page: $page, total: $total)';
+    return 'HomeState(applyFilter: $applyFilter, filters: $filters, widgetState: $widgetState, characters: $characters, charactersFilters: $charactersFilters, page: $page, total: $total)';
   }
 
   @override
@@ -210,6 +235,7 @@ class _$_HomeState extends _HomeState with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('filters', filters))
       ..add(DiagnosticsProperty('widgetState', widgetState))
       ..add(DiagnosticsProperty('characters', characters))
+      ..add(DiagnosticsProperty('charactersFilters', charactersFilters))
       ..add(DiagnosticsProperty('page', page))
       ..add(DiagnosticsProperty('total', total));
   }
@@ -226,6 +252,8 @@ class _$_HomeState extends _HomeState with DiagnosticableTreeMixin {
                 other.widgetState == widgetState) &&
             const DeepCollectionEquality()
                 .equals(other._characters, _characters) &&
+            const DeepCollectionEquality()
+                .equals(other._charactersFilters, _charactersFilters) &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.total, total) || other.total == total));
   }
@@ -237,6 +265,7 @@ class _$_HomeState extends _HomeState with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(_filters),
       widgetState,
       const DeepCollectionEquality().hash(_characters),
+      const DeepCollectionEquality().hash(_charactersFilters),
       page,
       total);
 
@@ -253,6 +282,7 @@ abstract class _HomeState extends HomeState {
       final List<bool> filters,
       final WidgetState widgetState,
       final List<Result> characters,
+      final List<Result> charactersFilters,
       final int page,
       final int total}) = _$_HomeState;
   const _HomeState._() : super._();
@@ -265,6 +295,8 @@ abstract class _HomeState extends HomeState {
   WidgetState get widgetState;
   @override
   List<Result> get characters;
+  @override
+  List<Result> get charactersFilters;
   @override
   int get page;
   @override
