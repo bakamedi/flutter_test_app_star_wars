@@ -25,6 +25,7 @@ class TitleSensor extends StatelessWidget {
 
             return AppBar(
               backgroundColor: Colors.white,
+              centerTitle: true,
               title: Transform(
                 transform: Matrix4.identity()
                   ..setEntry(3, 2, 0.002)
