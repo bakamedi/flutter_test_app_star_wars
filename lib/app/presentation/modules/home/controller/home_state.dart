@@ -12,6 +12,7 @@ class HomeState with _$HomeState {
   const HomeState._();
 
   const factory HomeState({
+    @Default(false) applyFilter,
     @Default([false, false, false]) List<bool> filters,
     @Default(WidgetState.initialized) WidgetState widgetState,
     @Default([]) List<Result> characters,

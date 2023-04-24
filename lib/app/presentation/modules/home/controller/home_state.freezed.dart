@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeState {
+  dynamic get applyFilter => throw _privateConstructorUsedError;
   List<bool> get filters => throw _privateConstructorUsedError;
   WidgetState get widgetState => throw _privateConstructorUsedError;
   List<Result> get characters => throw _privateConstructorUsedError;
@@ -33,7 +34,8 @@ abstract class $HomeStateCopyWith<$Res> {
       _$HomeStateCopyWithImpl<$Res, HomeState>;
   @useResult
   $Res call(
-      {List<bool> filters,
+      {dynamic applyFilter,
+      List<bool> filters,
       WidgetState widgetState,
       List<Result> characters,
       int page,
@@ -53,6 +55,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? applyFilter = freezed,
     Object? filters = null,
     Object? widgetState = null,
     Object? characters = null,
@@ -60,6 +63,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? total = null,
   }) {
     return _then(_value.copyWith(
+      applyFilter: freezed == applyFilter
+          ? _value.applyFilter
+          : applyFilter // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       filters: null == filters
           ? _value.filters
           : filters // ignore: cast_nullable_to_non_nullable
@@ -92,7 +99,8 @@ abstract class _$$_HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {List<bool> filters,
+      {dynamic applyFilter,
+      List<bool> filters,
       WidgetState widgetState,
       List<Result> characters,
       int page,
@@ -110,6 +118,7 @@ class __$$_HomeStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? applyFilter = freezed,
     Object? filters = null,
     Object? widgetState = null,
     Object? characters = null,
@@ -117,6 +126,7 @@ class __$$_HomeStateCopyWithImpl<$Res>
     Object? total = null,
   }) {
     return _then(_$_HomeState(
+      applyFilter: freezed == applyFilter ? _value.applyFilter! : applyFilter,
       filters: null == filters
           ? _value._filters
           : filters // ignore: cast_nullable_to_non_nullable
@@ -145,7 +155,8 @@ class __$$_HomeStateCopyWithImpl<$Res>
 
 class _$_HomeState extends _HomeState with DiagnosticableTreeMixin {
   const _$_HomeState(
-      {final List<bool> filters = const [false, false, false],
+      {this.applyFilter = false,
+      final List<bool> filters = const [false, false, false],
       this.widgetState = WidgetState.initialized,
       final List<Result> characters = const [],
       this.page = 1,
@@ -154,6 +165,9 @@ class _$_HomeState extends _HomeState with DiagnosticableTreeMixin {
         _characters = characters,
         super._();
 
+  @override
+  @JsonKey()
+  final dynamic applyFilter;
   final List<bool> _filters;
   @override
   @JsonKey()
@@ -184,7 +198,7 @@ class _$_HomeState extends _HomeState with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeState(filters: $filters, widgetState: $widgetState, characters: $characters, page: $page, total: $total)';
+    return 'HomeState(applyFilter: $applyFilter, filters: $filters, widgetState: $widgetState, characters: $characters, page: $page, total: $total)';
   }
 
   @override
@@ -192,6 +206,7 @@ class _$_HomeState extends _HomeState with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'HomeState'))
+      ..add(DiagnosticsProperty('applyFilter', applyFilter))
       ..add(DiagnosticsProperty('filters', filters))
       ..add(DiagnosticsProperty('widgetState', widgetState))
       ..add(DiagnosticsProperty('characters', characters))
@@ -204,6 +219,8 @@ class _$_HomeState extends _HomeState with DiagnosticableTreeMixin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_HomeState &&
+            const DeepCollectionEquality()
+                .equals(other.applyFilter, applyFilter) &&
             const DeepCollectionEquality().equals(other._filters, _filters) &&
             (identical(other.widgetState, widgetState) ||
                 other.widgetState == widgetState) &&
@@ -216,6 +233,7 @@ class _$_HomeState extends _HomeState with DiagnosticableTreeMixin {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(applyFilter),
       const DeepCollectionEquality().hash(_filters),
       widgetState,
       const DeepCollectionEquality().hash(_characters),
@@ -231,13 +249,16 @@ class _$_HomeState extends _HomeState with DiagnosticableTreeMixin {
 
 abstract class _HomeState extends HomeState {
   const factory _HomeState(
-      {final List<bool> filters,
+      {final dynamic applyFilter,
+      final List<bool> filters,
       final WidgetState widgetState,
       final List<Result> characters,
       final int page,
       final int total}) = _$_HomeState;
   const _HomeState._() : super._();
 
+  @override
+  dynamic get applyFilter;
   @override
   List<bool> get filters;
   @override

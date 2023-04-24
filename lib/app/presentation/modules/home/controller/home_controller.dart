@@ -23,6 +23,8 @@ class HomeController extends StateNotifier<HomeState> {
 
   List<bool> get filters => state.filters;
 
+  bool get applyFilter => state.applyFilter;
+
   bool get maleFilterSelected => state.filters[0];
   bool get femaleFilterSelected => state.filters[1];
   bool get unknowmFilterSelected => state.filters[2];
@@ -30,9 +32,13 @@ class HomeController extends StateNotifier<HomeState> {
   HomeController() : super(HomeState.initialState);
 
   void clearFilters() {
-    for (int i = 0; i < filters.length; i++) {
-      filters[i] = false;
+    List<bool> copyFilters = [...filters];
+    for (var i = 0; i < copyFilters.length; i++) {
+      copyFilters[i] = false;
     }
+    state = state.copyWith(
+      filters: [...copyFilters],
+    );
   }
 
   Future<void> load(
@@ -136,10 +142,10 @@ class HomeController extends StateNotifier<HomeState> {
     int index,
     bool selected,
   ) {
-    List<bool> tabs = [...filters];
-    tabs[index] = selected;
+    List<bool> copyFilters = [...filters];
+    copyFilters[index] = !copyFilters[index];
     state = state.copyWith(
-      filters: [...tabs],
+      filters: [...copyFilters],
     );
   }
 }
