@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/responsive.dart';
+import '../../../../../core/widget_state.dart';
 import '../../../../../domain/responses/character_response.dart';
 import '../../controller/home_controller.dart';
+import '../../utils/bottom_scroll_action.dart';
 import 'bottom_loading.dart';
 import 'card_character.dart';
 
 class LoadedHome extends StatelessWidget {
   final List<Result> characters;
+  final List<Result> charactersFilters;
+  final WidgetState widgetState;
   final HomeController homeController;
   const LoadedHome({
     super.key,
     required this.characters,
     required this.homeController,
+    required this.charactersFilters,
+    required this.widgetState,
   });
 
   @override
@@ -20,23 +26,7 @@ class LoadedHome extends StatelessWidget {
     final Responsive responsive = Responsive.of(context);
 
     return NotificationListener(
-      onNotification: (notification) {
-        final isEmpty = homeController.charactersFilters.isEmpty;
-        final position = homeController.scrollController.position;
-        if (isEmpty) {
-          if (notification is ScrollEndNotification) {
-            final offset = position.pixels;
-            final maxScrollExtent = position.maxScrollExtent;
-            if (offset >= maxScrollExtent) {
-              homeController.load(
-                homeController.state.page + 1,
-                retry: true,
-              );
-            }
-          }
-        }
-        return true;
-      },
+      onNotification: bottomScrollAction,
       child: CustomScrollView(
         controller: homeController.scrollController,
         slivers: [
@@ -51,23 +41,24 @@ class LoadedHome extends StatelessWidget {
                         horizontal: responsive.wp(2),
                         vertical: responsive.hp(1),
                       ),
-                      child: homeController.charactersFilters.isEmpty
+                      child: charactersFilters.isEmpty
                           ? CardCharacter(
                               character: characters[index],
                               homeController: homeController,
+                              widgetState: widgetState,
                             )
                           : CardCharacter(
-                              character:
-                                  homeController.charactersFilters[index],
+                              character: charactersFilters[index],
                               homeController: homeController,
+                              widgetState: widgetState,
                             ),
                     ),
                   ],
                 );
               },
-              childCount: homeController.charactersFilters.isEmpty
+              childCount: charactersFilters.isEmpty
                   ? characters.length
-                  : homeController.charactersFilters.length,
+                  : charactersFilters.length,
             ),
           ),
           BottomLoading(

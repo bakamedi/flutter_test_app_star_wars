@@ -153,8 +153,6 @@ class HomeController extends StateNotifier<HomeState> {
       applyFilter: copyFilters[0] || copyFilters[1] || copyFilters[2],
       filters: [...copyFilters],
     );
-    print(copyFilters[0] || copyFilters[1] || copyFilters[2]);
-    print(copyFilters);
   }
 
   void applyFilters() {
@@ -224,9 +222,6 @@ class HomeController extends StateNotifier<HomeState> {
                 element.gender == Gender.UNKNOWN,
           )
           .toList();
-    }
-    for (var element in resultFilter) {
-      print(element.gender.name);
     }
     state = state.copyWith(
       applyFilter: true,

@@ -10,10 +10,12 @@ import 'filter_characters.dart';
 class CardCharacter extends StatelessWidget {
   final HomeController homeController;
   final Result character;
+  final WidgetState widgetState;
   const CardCharacter({
     super.key,
     required this.character,
     required this.homeController,
+    required this.widgetState,
   });
 
   @override
@@ -22,7 +24,7 @@ class CardCharacter extends StatelessWidget {
 
     return Card(
       elevation: 3,
-      color: homeController.state.widgetState == WidgetState.openFilmsLoading
+      color: widgetState == WidgetState.openFilmsLoading
           ? const Color.fromARGB(235, 247, 247, 244)
           : Colors.white,
       borderOnForeground: false,
@@ -43,8 +45,7 @@ class CardCharacter extends StatelessWidget {
             dividerColor: Colors.transparent,
           ),
           child: IgnorePointer(
-            ignoring: homeController.state.widgetState ==
-                WidgetState.openFilmsLoading,
+            ignoring: widgetState == WidgetState.openFilmsLoading,
             child: ExpansionTile(
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,8 +66,7 @@ class CardCharacter extends StatelessWidget {
                 ],
               ),
               children: [
-                homeController.state.widgetState ==
-                            WidgetState.openFilmsLoading &&
+                widgetState == WidgetState.openFilmsLoading &&
                         character.films.isEmpty
                     ? Padding(
                         padding: EdgeInsets.symmetric(
